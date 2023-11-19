@@ -42,7 +42,7 @@ public class InMemoryItemRepository implements ItemRepository {
     public Item update(Item item, Integer itemId) throws NotFound {
         if (items.containsKey(itemId)) {
             Item toUpdate = items.get(itemId);
-            if (toUpdate.getOwner().getId() == item.getOwner().getId()) {
+            if (toUpdate.getOwner().getId().equals(item.getOwner().getId())) {
                 if (item.getName() != null) {
                     toUpdate.setName(item.getName());
                 }
@@ -73,7 +73,7 @@ public class InMemoryItemRepository implements ItemRepository {
     @Override
     public Collection<Item> getUserItems(Integer userId) {
         return items.values().stream()
-                .filter(item -> item.getOwner().getId() == userId)
+                .filter(item -> item.getOwner().getId().equals(userId))
                 .collect(Collectors.toList());
     }
 
